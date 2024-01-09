@@ -1,0 +1,18 @@
+{
+  "name": "ejer3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+
+  "scripts": {
+    "crear": "mkdir files",
+    "crear:js": "echo console.log(\"Hello, world!\"); > files/$1.js",
+    "crear:carpeta": "mkdir -p files/$1",
+    "borrar": "rmdir -rf files",
+    "borrar:js": "del /q files\\*.js"
+  },
+
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node ./index.js",
+    "clear:modules": "rimraf **/node_modules",
+  "clear:locks": "rimraf **/package-lock.json",
+  "clear": "clear:test && npm run clear:locks && npm run clear:modules"
+  },
+
+  "dependencies": {
+    "colors": "^1.4.0",
+    "nodemon": "^3.0.1"
+  }
+}

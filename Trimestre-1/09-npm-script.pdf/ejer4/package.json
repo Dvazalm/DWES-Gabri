@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "imprime:azul": "node index.js azul",
+    "imprime:rojo": "node index.js rojo",
+    "imprime:verde": "node index.js verde"
+  },
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
+}

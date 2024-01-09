@@ -1,0 +1,12 @@
+{
+  "name": "ejer2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "date": "node -e \"console.log(new Date().toLocaleString())\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,1 @@
+//Este es el comando que se ejecuta al poner npm tun date = console.log(new Date().toLocaleString())

@@ -1,0 +1,132 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "a8ed8aae414ac43e",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "piedra",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "piedra",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 100,
+        "wires": [
+            [
+                "b3bd6bddb551a9b1"
+            ]
+        ]
+    },
+    {
+        "id": "279bb10be267987c",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "papel",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "papel",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 160,
+        "wires": [
+            [
+                "b3bd6bddb551a9b1"
+            ]
+        ]
+    },
+    {
+        "id": "00ceff0b0aa58eba",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "tijera",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "tijera",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 220,
+        "wires": [
+            [
+                "b3bd6bddb551a9b1"
+            ]
+        ]
+    },
+    {
+        "id": "b3bd6bddb551a9b1",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 1",
+        "func": "const eleccion = msg.topic;\n\nlet resultado = '';\n\nconst opcionesBot = ['piedra', 'papel', 'tijera'];\n\nconst eleccionBot = opcionesBot[ Math.floor(Math.random() * 3) ];\n\nif (eleccion === eleccionBot){\n     resultado = 'EMPATE';\n}else if(eleccion == 'piedra' && eleccionBot == 'papel'){\n    resultado = 'PERDISTE';\n} else if (eleccion == 'piedra' && eleccionBot == 'tijera') {\n      resultado = 'GANASTE';\n} else if (eleccion == 'papel' && eleccionBot == 'piedra') {\n      resultado = 'GANASTE';\n} else if (eleccion == 'papel' && eleccionBot == 'tijera') {\n    resultado = 'PERDISTE';\n} else if (eleccion == 'tijera' && eleccionBot == 'papel') {\n    resultado = 'GANASTE';\n} else if (eleccion == 'tijera' && eleccionBot == 'piedra') {\n    resultado = 'PERDISTE';\n}\n\nconsole.log(resultado);\n\nmsg.payload = resultado;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 160,
+        "wires": [
+            [
+                "fa230b5302c43428"
+            ]
+        ]
+    },
+    {
+        "id": "fa230b5302c43428",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 160,
+        "wires": []
+    }
+]
