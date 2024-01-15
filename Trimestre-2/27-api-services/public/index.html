@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.3/socket.io.js"></script>
+    <script defer>
+        window.onload = init;
+
+        const socket = io();
+
+        function init(){     
+
+        
+        
+            const ul = document.getElementById('list');
+
+        const createLi = (text)  => {
+            const li = document.createElement('li');
+            li.innerText = text;
+            return li;
+        }
+
+   
+        
+        socket.on('single', (data) => {
+            console.log(data);
+        })
+
+        socket.on('all', (data) => {
+            console.log(data);
+            ul.appendChild(createLi(data));
+        })
+
+    }
+
+
+
+    function send(){
+        const input = document.getElementById('input')
+        socket.emit(`echo`, input.value);
+    }
+    </script>
+</head>
+<body>
+    <button id="btn" onclick="send()">click me</button>
+    <input type="text" id="input">
+    <ul id="list"></ul>
+</body>
+</html>
