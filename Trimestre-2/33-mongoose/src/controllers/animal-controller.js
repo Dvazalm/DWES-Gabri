@@ -1,32 +1,22 @@
 import mongoose from "mongoose";
-
 import logger from "../utils/logger.js";
-import Animals from "../moodels/Animals";
-
-/*
-const { Object } = mongoose.Types;
-*/
+import Animal from "../models/Animals.js";
+import { HttpStatusError } from "common-errors";
 
 export async function getAnimals(req, res, next) {
   try {
-
-    const result = await Animals.find()
-
+    const result = await Animal.find();
     return res.send(result);
   } catch (error) {
     next(error);
   }
 }
 
-
-
 export async function createAnimal(req, res, next) {
   try {
     const animal = new Animal(req.body);
-
-    const createAnimal = await animal.save()
-
-    return res.statatus(201).send(createAnimal);
+    const createAnimal = await animal.save(); // Corregido: usar 'animal' en lugar de 'Animal'
+    return res.status(201).send(createAnimal);
   } catch (error) {
     next(error);
   }
@@ -35,28 +25,24 @@ export async function createAnimal(req, res, next) {
 export async function updateAnimal(req, res, next) {
   try {
     const { id } = req.params;
-    const animal = Animal.findById(id);
-
-    Object.assign(animal, req.body);
-
-    const createAnimal = await animal.save();
-
-    return res.statatus(200).send(createAnimal);
+    const animal = await Animal.findByIdAndUpdate(id, req.body, { new: true }); // Corregido: usar 'findByIdAndUpdate'
+    if (!animal) {
+      throw new HttpStatusError(404, `Animal ${id} not found`);
+    }
+    return res.status(200).send(animal);
   } catch (error) {
     next(error);
   }
 }
 
-
 export async function deleteAnimal(req, res, next) {
   try {
     const { id } = req.params;
-    const animal = Animal.findById(id);
-
-    const deleteAnimal = await animal.delete();
-
-
-    return res.statatus(200).send(createAnimal);
+    const deleteAnimal = await Animal.findByIdAndDelete(id);
+    if (!deleteAnimal) {
+      throw new HttpStatusError(404, `Animal ${id} not found`);
+    }
+    return res.status(200).send(deleteAnimal);
   } catch (error) {
     next(error);
   }
