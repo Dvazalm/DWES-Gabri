@@ -7,4 +7,13 @@ const userSchema = new Schema({
   password: { type: String, require: true }
 }, {timestamps: true});
 
+
+userSchema.post('find', function (results){
+  console.log('ey')
+  results.forEach(doc => {
+    delete doc.password;
+  })
+  next();
+})
+
 export default model('user', userSchema);

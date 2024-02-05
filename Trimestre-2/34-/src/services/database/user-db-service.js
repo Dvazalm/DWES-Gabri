@@ -1,5 +1,5 @@
-import { User } from  '../../models';
-import { encryptPassword, checkHash } from '../utils/encrypt.js';
+import  User from  '../../models/User.js';
+import { encryptPassword, checkHash } from '../../utils/encrypt.js';
 
 async function findUserByNameAndPassword(username, password) {
   const user = await User.findOne({ username, password});

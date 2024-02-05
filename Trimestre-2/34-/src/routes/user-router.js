@@ -1,10 +1,13 @@
 import { Router  } from "express";
-import { getUserController } from '../controllers/users-controller.js';
-import router from "./misc-router.js";
+import { getUserController, getUserMe } from '../controllers/users-controller.js';
+import { checkToken } from "../middlewares/auth-middleware.js";
 
 
 const router = Router();
 
+router.get('/me', checkToken, getUserMe);
+router.get('/', checkToken, getUserController);
 router.post('/', getUserController);
+
 
 export default router;

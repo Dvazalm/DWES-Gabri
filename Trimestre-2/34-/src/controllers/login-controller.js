@@ -4,15 +4,17 @@ import jwt from 'jsonwebtoken';
 
 import config from '../config.js';
 
-export function login(req, res, next){
+
+export async function login(req, res, next){
        const { username, password } = req.body;
 
-    const user = findUser(username);
+       try{
+    const user = await getUserByName(username);
 
     if(user){
         console.log(password, user.password);
         if(bcrypt.compareSync(password, user.password)){
-            const userInfo = { id: user.id, name: user.name };
+            const userInfo = { id: user.id, username: user.name };
             const jwtConfig = { expiresIn: 10 };
             const token = jwt.sign(userInfo, config.app.secretKey, jwtConfig);
             return res.send({token});
@@ -20,6 +22,9 @@ export function login(req, res, next){
     }
 
     throw new HttpStatusError(401, 'Invalid credentials');
+  }catch{
+    next(error);
+  }
 }
 
 
